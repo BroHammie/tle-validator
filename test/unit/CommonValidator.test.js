@@ -1,4 +1,4 @@
-const CommonValidator = require('../src/CommonValidator');
+const CommonValidator = require('../../src/CommonValidator');
 
 test('validates positive', () => {
     expect(CommonValidator.isPosNegOrZero("+")).toBe(true);
@@ -19,8 +19,8 @@ test('invalidates space', () => {
 test('validates checksum', () => {
     expect(CommonValidator.validCheckSum("1 25544U 98067777 08264.51782528 -.00002182  00000-0 -00000-0 0 00011")).toBe(true);
 });
-test('validates checksum', () => {
-    expect(CommonValidator.validCheckSum("1 25544U 98067777 08264.51782528 -.00002182  00000-0 -00000-0 0 00011")).toBe(true);
+test('validates invalid checksum', () => {
+    expect(CommonValidator.validCheckSum("1 25544U 98067777 08264.51782528 -.00002182  00000-0 -00000-0 0 0001 ")).toBe(false);
 });
 
 test('validates valid satNo', () => {

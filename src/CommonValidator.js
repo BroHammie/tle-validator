@@ -1,4 +1,5 @@
 const numberRegExp = new RegExp("[0-9]");
+const satNoRegExp = new RegExp("[0-9]{5}");
 module.exports = {
 
     isSpace: function(line, index) {
@@ -21,8 +22,7 @@ module.exports = {
     validSatNo: function(line) {
         let result = false;
         let satNo = line.substr(2, 5);
-        let parsedSatNo = parseInt(satNo);
-        if (!isNaN(parsedSatNo) && parsedSatNo.toFixed().length == 5) {
+        if (satNoRegExp.test(satNo)) {
             result = true;
         }
         return result;

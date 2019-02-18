@@ -1,4 +1,4 @@
-const LineTwoValidator = require('../src/LineTwoValidator');
+const LineTwoValidator = require('../../src/LineTwoValidator');
 
 test('validates valid line 2 number', () => {
     const validLineTwo = "2 ";

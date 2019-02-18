@@ -1,4 +1,4 @@
-const LineOneValidator = require('../src/LineOneValidator');
+const LineOneValidator = require('../../src/LineOneValidator');
 
 test('validates valid line 1 number', () => {
     const validLineOne = "1 ";
