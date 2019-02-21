@@ -1,9 +1,10 @@
 {
   "name": "tle-validator",
   "version": "1.0.0",
-  "description": "Validates Two Line Element Sets With Regex",
-  "main": "src/tle-validator.js",
+  "description": "TLE Validator",
+  "main": "dist/tle-validator.js",
   "scripts": {
+    "build": "webpack",
     "test": "jest"
   },
   "repository": {
@@ -11,7 +12,8 @@
     "url": "git+https://github.com/BroHammie/tle-validator.git"
   },
   "keywords": [
-    "TLE"
+    "TLE",
+    "Two Line Element Set"
   ],
   "author": "BroHammie",
   "license": "ISC",
@@ -20,6 +22,8 @@
   },
   "homepage": "https://github.com/BroHammie/tle-validator#readme",
   "devDependencies": {
-    "jest": "24.1.0"
+    "jest": "24.1.0",
+    "webpack": "^4.29.4",
+    "webpack-cli": "^3.2.3"
   }
 }

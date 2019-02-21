@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build:
+    docker: # use the docker executor type; machine and macos executors are also supported
+      - image: circleci/node:6.10.3 # the primary container, where your job's commands are run
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
