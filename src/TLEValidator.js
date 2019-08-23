@@ -20,31 +20,33 @@ module.exports = {
         return result;
     },
 
-    validateTLEWithMessage: function(lineOne, lineTwo) {
-        let result = true;
-        if (lineOne && lineTwo) {
-            let lineOneResult = this.validateLineOneWithMessage(lineOne);
-            if (!lineOneResult.isValid) {
-                result = {
-                    isValid: false,
-                    lineOneErrors: lineOneResult
-                };
-            }
+    validateTLEWithMessage: function(tle) {
+        const lines = tle.split("\n");
+        return this.validateLinesWithMessage(lines[0], lines[1]);
+    },
 
-            let lineTwoErrors = this.validateLineTwoWithMessage(lineTwo);
-            if (lineTwoErrors) {
-                if (!result.isValid) {
-                    result.lineTwoErrors = lineTwoErrors;
-                } else {
-                    result = {
-                        isValid: false,
-                        lineTwoErrors: lineTwoErrors
-                    };
+    validateLinesWithMessage: function(lineOne, lineTwo) {
+        let result = {isValid: true};
+        if (lineOne && lineTwo) {
+
+            let lineOneResult = this.validateLineOneWithMessage(lineOne);
+            let lineTwoResult = this.validateLineTwoWithMessage(lineTwo);
+
+            if (!lineOneResult.isValid || !lineTwoResult.isValid) {
+                result = {
+                    isValid: false
+                };
+                if (!lineOneResult.isValid) {
+                    result.lineOneErrors = lineOneResult;
+                }
+
+                if (!lineTwoResult.isValid) {
+                    result.lineTwoErrors = lineTwoResult;
                 }
             }
 
         } else {
-            // TODO add in ThreeLE
+            // TODO add in ThreeLE?
             result = {
                 isValid: false,
                 message: "Not enough lines"
@@ -67,7 +69,7 @@ module.exports = {
             isValid: lineOneRegExp.test(line1)
         };
         if (!result.isValid) {
-            if (!LineOneValidator.validLineOneNumber(line1)){
+            if (!LineOneValidator.validLineOneNumber(line1)) {
                 result = {
                     invalidSubStr: [0, 1],
                     message: "Invalid Line One Number"
@@ -142,7 +144,7 @@ module.exports = {
                     invalidSubStr: [44, 8],
                     message: "Invalid Second Mean Motion"
                 };
-            }  else if (!CommonValidator.isSpace(line1, 52)) {
+            } else if (!CommonValidator.isSpace(line1, 52)) {
                 result = {
                     invalidSubStr: [52, 1],
                     message: "Invalid Space"
@@ -178,8 +180,6 @@ module.exports = {
                     message: "Invalid Checksum"
                 };
             }
-            result.isValid = false;
-            result.lineNumber = 1;
         }
         return result;
     },
@@ -189,7 +189,7 @@ module.exports = {
             isValid: lineTwoRegExp.test(line2)
         };
         if (!result.isValid) {
-            if (!LineTwoValidator.validLineTwoNumber(line2)){
+            if (!LineTwoValidator.validLineTwoNumber(line2)) {
                 result = {
                     invalidSubStr: [0, 1],
                     message: "Invalid Line Two Number"
@@ -275,8 +275,6 @@ module.exports = {
                     message: "Invalid Checksum"
                 };
             }
-            result.isValid = false;
-            result.lineNumber = 2;
         }
         return result;
     }
