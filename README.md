@@ -2,9 +2,9 @@
 
 TLEs suck, this helps them suck less.
 
-Can run straight regex with validateTLE() that returns a boolean or run with validateTLEWithMsg() to get indexes that are wrong with what component is effed up.
+Can run validateTLE() that returns a boolean or run with validateTLEWithMsg() to get indexes that are wrong with what component is effed up.
 
-Example result:
+Example `validateTLEWithMsg()` result:
 ```
 {
     isValid: false,
@@ -15,3 +15,5 @@ Example result:
         }
     ]
 }
+```
+Does this even work tho?! Catalog.test.js runs against the whole catalog(17k sats). 
