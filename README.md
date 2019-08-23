@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/BroHammie/tle-validator/tree/master.svg?style=svg)](https://circleci.com/gh/BroHammie/tle-validator/tree/master)
 # tle-validator
 
 TLEs suck, this helps them suck less.
