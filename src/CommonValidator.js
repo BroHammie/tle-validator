@@ -19,6 +19,33 @@ module.exports = {
         let checkSum = line.substr(68, 1);
         return numberRegExp.test(checkSum);
     },
+    checkCheckSum: function(line) {
+        let result = {isValid: true};
+        
+        let providedCheckSum = Number(line.slice(-1));  //extract the checksum
+        line = line.slice(0, -1);               //remove checksum from line
+        let checksum = 0;
+        line.split('').forEach(function(element) {
+            if (element === '-') {
+                checksum++;
+            }
+            if (!isNaN(element)) {
+                checksum += Number(element);
+            }
+        });
+
+        checksum = checksum % 10;
+        if (checksum === providedCheckSum) {
+
+        } else {
+            result = {
+                isValid: false,
+                calculatedCheckSum: checksum
+            };
+        }
+
+        return result;
+    },
     validSatNo: function(line) {
         let result = false;
         let satNo = line.substr(2, 5);

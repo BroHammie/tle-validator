@@ -68,6 +68,15 @@ module.exports = {
         let result = {
             isValid: lineOneRegExp.test(line1)
         };
+        if (result.isValid) {
+            let checkSumResult = CommonValidator.checkCheckSum(line1);
+            if (checkSumResult.isValid === false) {
+                result = {
+                    invalidSubStr: [68, 1],
+                    message: "Incorrect Checksum, expected: "+checkSumResult.calculatedCheckSum
+                };
+            }
+        }
         if (!result.isValid) {
             if (!LineOneValidator.validLineOneNumber(line1)) {
                 result = {
@@ -188,6 +197,15 @@ module.exports = {
         let result = {
             isValid: lineTwoRegExp.test(line2)
         };
+        if (result.isValid) {
+            let checkSumResult = CommonValidator.checkCheckSum(line2);
+            if (checkSumResult.isValid === false) {
+                result = {
+                    invalidSubStr: [68, 1],
+                    message: "Incorrect Checksum, expected: "+checkSumResult.calculatedCheckSum
+                };
+            }
+        }
         if (!result.isValid) {
             if (!LineTwoValidator.validLineTwoNumber(line2)) {
                 result = {

@@ -23,6 +23,18 @@ test('validates invalid checksum', () => {
     expect(CommonValidator.validCheckSum("1 25544U 98067777 08264.51782528 -.00002182  00000-0 -00000-0 0 0001 ")).toBe(false);
 });
 
+test('validates checksum calculation', () => {
+    expect(CommonValidator.checkCheckSum("1 41868U 16061G   20139.90454403 +.00034898 +87835-5 +88966-4 0  9994")).toEqual({
+        isValid: true,
+    });
+});
+test('validates invalid checksum calculation', () => {
+    expect(CommonValidator.checkCheckSum("1 41868U 16061G   20139.90454403 +.00034898 +87835-5 +88966-4 0  9995")).toEqual({
+        isValid: false,
+        calculatedCheckSum: 4
+    });
+});
+
 test('validates valid satNo', () => {
     const validLineOne = "1 25544 ";
     expect(CommonValidator.validSatNo(validLineOne)).toBe(true);
