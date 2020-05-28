@@ -51,7 +51,7 @@ module.exports = {
         let result = false;
         let firstChar = line1.substr(33, 1);
         let secondChar = line1.substr(34, 1);
-        if (CommonValidator.isPosNegOrZero(firstChar) && CommonValidator.isPeriod(secondChar)) {
+        if ((CommonValidator.isPosNegOrZero(firstChar) || CommonValidator.isSpace(line1, 33) ) && CommonValidator.isPeriod(secondChar)) {
             let firstMeanMotionFraction = line1.substr(35, 8);
             if (eightDigitsRegExp.test(firstMeanMotionFraction)) {
                 result = true;
@@ -64,7 +64,7 @@ module.exports = {
         let preDashNums = line1.substr(45, 5);
         let hyphen = line1.substr(50, 1);
         let lastChar = line1.substr(51, 1);
-        if (CommonValidator.isSpace(line1, 44)) {
+        if (CommonValidator.isPosNegOrZero(line1.substr(44, 1)) || CommonValidator.isSpace(line1, 44)) {
             if (fiveDigitsRegExp.test(preDashNums)) {
                 if (CommonValidator.isHyphen(hyphen)) {
                     if (!isNaN(lastChar)) {
@@ -82,7 +82,7 @@ module.exports = {
         let preDashNums = line1.substr(54, 5);
         let hyphen = line1.substr(59, 1);
         let lastChar = line1.substr(60, 1);
-        if (CommonValidator.isPosNegOrZero(firstChar)) {
+        if (CommonValidator.isPosNegOrZero(firstChar) || CommonValidator.isSpace(line1, 53)) {
             if (fiveDigitsRegExp.test(preDashNums)) {
                 if (CommonValidator.isHyphen(hyphen)) {
                     if (!isNaN(lastChar)) {
