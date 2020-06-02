@@ -16,34 +16,31 @@ module.exports = {
         return result;
     },
     validCheckSum: function(line) {
-        let checkSum = line.substr(68, 1);
-        return numberRegExp.test(checkSum);
-    },
-    checkCheckSum: function(line) {
         let result = {isValid: true};
-        
-        let providedCheckSum = Number(line.slice(-1));  //extract the checksum
-        line = line.slice(0, -1);               //remove checksum from line
-        let checksum = 0;
-        line.split('').forEach(function(element) {
-            if (element === '-') {
-                checksum++;
-            }
-            if (!isNaN(element)) {
-                checksum += Number(element);
-            }
-        });
+        let providedCheckSum = line.substr(68, 1);
+        if (numberRegExp.test(providedCheckSum)) {
+            line = line.slice(0, -1);       //remove checksum from line
+            let checksum = 0;
+            line.split('').forEach(function(element) {
+                if (element === '-') {
+                    checksum++;
+                } else if (!isNaN(element)) {
+                    checksum += Number(element);
+                }
+            });
 
-        checksum = checksum % 10;
-        if (checksum === providedCheckSum) {
-
+            checksum = checksum % 10;
+            if (checksum !== Number(providedCheckSum)) {
+                result = {
+                    isValid: false,
+                    calculatedCheckSum: checksum
+                };
+            }
         } else {
             result = {
-                isValid: false,
-                calculatedCheckSum: checksum
+                isValid: false
             };
         }
-
         return result;
     },
     validSatNo: function(line) {
