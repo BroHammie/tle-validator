@@ -3,7 +3,7 @@
 
 TLEs suck, this helps them suck less.
 
-Can run validateTLE() that returns a boolean or run with validateTLEWithMsg() to get indexes that are wrong with what component is effed up.
+Can run validateTLE() that returns a boolean or run with validateTLEWithMsg() to get indexes that are wrong with what component is messed up.
 
 Example `validateTLEWithMsg()` result:
 ```
