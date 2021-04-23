@@ -16,8 +16,32 @@ module.exports = {
         return result;
     },
     validCheckSum: function(line) {
-        let checkSum = line.substr(68, 1);
-        return numberRegExp.test(checkSum);
+        let result = {isValid: true};
+        let providedCheckSum = line.substr(68, 1);
+        if (numberRegExp.test(providedCheckSum)) {
+            line = line.slice(0, -1);       //remove checksum from line
+            let checksum = 0;
+            line.split('').forEach(function(element) {
+                if (element === '-') {
+                    checksum++;
+                } else if (!isNaN(element)) {
+                    checksum += Number(element);
+                }
+            });
+
+            checksum = checksum % 10;
+            if (checksum !== Number(providedCheckSum)) {
+                result = {
+                    isValid: false,
+                    calculatedCheckSum: checksum
+                };
+            }
+        } else {
+            result = {
+                isValid: false
+            };
+        }
+        return result;
     },
     validSatNo: function(line) {
         let result = false;

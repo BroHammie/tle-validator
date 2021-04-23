@@ -16,11 +16,21 @@ test('invalidates space', () => {
     expect(CommonValidator.isPosNegOrZero(" ")).toBe(false);
 });
 
-test('validates checksum', () => {
-    expect(CommonValidator.validCheckSum("1 25544U 98067777 08264.51782528 -.00002182  00000-0 -00000-0 0 00011")).toBe(true);
+test('validates existing checksum', () => {
+    expect(CommonValidator.validCheckSum("1 25544U 98067A   08264.51782528 -.00002182  00000-0 -11606-4 0  292a")).toEqual({
+        isValid: false,
+    });
 });
-test('validates invalid checksum', () => {
-    expect(CommonValidator.validCheckSum("1 25544U 98067777 08264.51782528 -.00002182  00000-0 -00000-0 0 0001 ")).toBe(false);
+test('validates checksum calculation', () => {
+    expect(CommonValidator.validCheckSum("1 25544U 98067A   08264.51782528 -.00002182  00000-0 -11606-4 0  2927")).toEqual({
+        isValid: true,
+    });
+});
+test('validates invalid checksum calculation', () => {
+    expect(CommonValidator.validCheckSum("1 25544U 98067A   08264.51782528 -.00002182  00000-0 -11606-4 0  2929")).toEqual({
+        isValid: false,
+        calculatedCheckSum: 7
+    });
 });
 
 test('validates valid satNo', () => {
