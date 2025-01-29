@@ -68,6 +68,17 @@ module.exports = {
         let result = {
             isValid: lineOneRegExp.test(line1)
         };
+
+        if (result.isValid) {
+            let checksumValidation = CommonValidator.validCheckSum(line1);
+            if (!checksumValidation.isValid) {
+                result = {
+                    invalidSubStr: [68, 1],
+                    message: "Invalid Checksum, expected: "+checksumValidation.calculatedCheckSum
+                };
+            }
+        }
+
         if (!result.isValid) {
             if (!LineOneValidator.validLineOneNumber(line1)) {
                 result = {
@@ -188,6 +199,19 @@ module.exports = {
         let result = {
             isValid: lineTwoRegExp.test(line2)
         };
+
+        if (result.isValid) {
+            let checksumValidation = CommonValidator.validCheckSum(line2);
+            // console.log(line2)
+            // console.log(checksumValidation)
+            if (!checksumValidation.isValid) {
+                result = {
+                    invalidSubStr: [68, 1],
+                    message: "Invalid Checksum, expected: "+checksumValidation.calculatedCheckSum
+                };
+            }
+        }
+
         if (!result.isValid) {
             if (!LineTwoValidator.validLineTwoNumber(line2)) {
                 result = {

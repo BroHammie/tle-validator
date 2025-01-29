@@ -99,12 +99,13 @@ test('line1 invalid element set number', () => {
 });
 
 test('line1 invalid checksum', () => {
-    expect(TLEValidator.validateLineOneWithMessage("1 25544U 98067A   08264.51782528 -.00002182  00000-0 -11606-4 0  292a")).toEqual({
+    expect(TLEValidator.validateLineOneWithMessage("1 25544U 98067A   08264.51782528 -.00002182  00000-0 -11606-4 0  2929")).toEqual({
 
         invalidSubStr: [68, 1],
-        message: "Invalid Checksum"
+        message: "Invalid Checksum, expected: 7"
     });
 });
+
 
 test('line1 invalid space', () => {
     expect(TLEValidator.validateLineOneWithMessage("1a25544U 98067A   08264.51782528 -.00002182  00000-0 -11606-4 0  2927")).toEqual({
@@ -223,10 +224,10 @@ test('line2 invalid Rev Number', () => {
 });
 
 test('line2 invalid Checksum', () => {
-    expect(TLEValidator.validateLineTwoWithMessage("2 25544  51.6416 247.4627 0006703 130.5360 325.0288 15.7212539156353a")).toEqual({
+    expect(TLEValidator.validateLineTwoWithMessage("2 25544  51.6416 247.4627 0006703 130.5360 325.0288 15.72125391563538")).toEqual({
 
         invalidSubStr: [68, 1],
-        message: "Invalid Checksum"
+        message: "Invalid Checksum, expected: 7"
     });
 });
 
